@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hộp Bí Ẩn Về Văn Hóa Truyền Thống Việt Nam</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- (Previous CSS styles remain the same) --- */
+
+        /* CSS chung */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background-color: #d32f2f;
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 20px 0;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 5px;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .sidebar-menu a.active {
+            background-color: rgba(255,255,255,0.2);
+            border-left: 4px solid white;
+            padding-left: 16px;
+        }
+
+        .payment-icon-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .payment-icon-container .fa-credit-card {
+            margin-right: 10px;
+        }
+
+        /* Main content */
+        .main-content {
+            margin-left: 250px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            color: #d32f2f;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        /* Product section */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .mystery-box {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            width: 350px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mystery-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .box-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .box-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .box-content > *:last-child {
+             margin-top: auto;
+        }
+
+        .box-title {
+            font-size: 24px;
+            margin: 0 0 10px;
+            color: #d32f2f;
+        }
+
+        .box-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .combo-options {
+            margin: 15px 0;
+        }
+
+        .combo-option {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 8px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95em;
+        }
+
+        .combo-option:hover {
+            background-color: #f0f0f0;
+        }
+
+        .combo-option.selected {
+            background-color: #d32f2f;
+            color: white;
+            font-weight: bold;
+        }
+        .combo-option.selected span:last-child {
+             font-weight: bold;
+        }
+
+
+        .box-price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #d32f2f;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .cta-button {
+            display: block;
+            background: linear-gradient(45deg, #d32f2f, #f44336);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(45deg, #b71c1c, #d32f2f);
+            transform: scale(1.02);
+        }
+
+
+        /* Quick Payment Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            z-index: 1000;
+            width: 450px;
+            max-width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal h2 {
+             text-align: center;
+             margin-bottom: 20px;
+             color: #d32f2f;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .submit-btn, .close-btn {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+        }
+         .close-btn {
+            background: #aaa;
+            margin-top: 15px;
+        }
+        .close-btn:hover {
+            background: #888;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 999;
+        }
+
+        /* Quick Payment Specific Styles */
+        #quickPaymentModal .modal-content{
+             /* Add styles if needed for content area */
+        }
+        
+        .quick-payment-items {
+            margin-bottom: 20px;
+            padding: 15px 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .quick-payment-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .quick-payment-total {
+            text-align: right;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            margin: 20px 0;
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .payment-method input[type="radio"] {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #d32f2f;
+            border-radius: 50%;
+            margin-right: 10px;
+            cursor: pointer;
+            position: relative;
+            top: 3px;
+        }
+        .payment-method input[type="radio"]:checked {
+             background-color: #d32f2f;
+             border-color: #d32f2f;
+        }
+        .payment-method input[type="radio"]:checked::after {
+             content: '';
+             display: block;
+             width: 8px;
+             height: 8px;
+             background-color: white;
+             border-radius: 50%;
+             position: absolute;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+         }
+
+        .payment-qr {
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+            border: 1px dashed #ccc;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        .payment-qr img {
+             max-width: 150px;
+             height: auto;
+             margin: 10px auto;
+             border: 1px solid #eee;
+         }
+        .payment-qr p {
+            font-size: 0.95em;
+            color: #555;
+            line-height: 1.5;
+        }
+        .payment-amount { font-weight: bold; }
+        .payment-order-code { color: #d32f2f; font-family: monospace; }
+
+        /* Thank You Modal */
+        .thank-you {
+            text-align: center;
+            padding: 20px;
+        }
+        .thank-you h2 { color: #d32f2f;}
+        .thank-you img {
+            max-width: 150px;
+            margin: 15px auto;
+        }
+
+
+        /* Info page */
+        .info-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+
+         .info-grid {
+             display: grid;
+             grid-template-columns: 1fr;
+             gap: 40px;
+         }
+
+        .info-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 30px;
+        }
+        .info-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+
+        .info-item h3 {
+            color: #d32f2f;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #d32f2f;
+            display: inline-block;
+        }
+
+        .info-details {
+             display: flex;
+             flex-direction: column;
+             gap: 20px;
+         }
+
+         .info-text {
+            flex: 1;
+            line-height: 1.7;
+         }
+        .info-text ul {
+            list-style: disc;
+            margin-left: 25px;
+            margin-top: 10px;
+            color: #555;
+         }
+         .info-text li { margin-bottom: 5px; }
+
+
+        .info-visuals {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 15px; /* Add some padding */
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            border: 1px solid #eee; /* Add light border */
+            max-width: 220px; /* Constrain width */
+            margin: 0 auto; /* Center it when stacked vertically */
+        }
+        .info-illustration {
+             max-width: 150px;
+             height: auto;
+             border-radius: 5px;
+             border: 1px solid #ddd;
+             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+         }
+
+        .qr-code { /* Modified for info page */
+            width: 90px;
+            height: 90px;
+            margin: 0;
+            display: block;
+            border: 2px solid #d32f2f;
+            border-radius: 5px;
+            padding: 4px;
+            background-color: white;
+            transition: transform 0.3s ease;
+        }
+         .qr-code:hover {
+             transform: scale(1.08);
+         }
+
+        /* Responsive */
+        @media (min-width: 769px) {
+            .info-details {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+            .info-visuals {
+                flex-basis: 220px; /* Give visuals a fixed base width */
+                flex-shrink: 0;
+                margin: 0 0 0 20px; /* Margin left when side-by-side */
+                align-self: flex-start; /* Align top */
+             }
+             .info-item h3 {
+                  margin-bottom: 20px;
+              }
+         }
+
+        @media (max-width: 992px) {
+             .mystery-box {
+                 width: calc(50% - 15px); /* Two boxes per row */
+                 min-height: 500px; /* Try to maintain height */
+             }
+             .combo-box .box-description {
+                 font-size: 0.95em; /* Slightly smaller text in combo descriptions */
+             }
+              .combo-option span {
+                 font-size: 0.9em; /* Slightly smaller text */
+             }
+         }
+
+        @media (max-width: 768px) {
+            body {
+                 flex-direction: column;
+             }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                z-index: 1;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 15px;
+            }
+             .modal {
+                 width: 90%;
+             }
+            .mystery-box {
+                 width: calc(50% - 10px); /* Adjust gap */
+                 gap: 20px;
+                  min-height: auto; /* Let height be auto */
+             }
+             .box-image { height: 200px;}
+         }
+          @media (max-width: 576px) {
+               .mystery-box {
+                  width: 100%; /* One box per row */
+               }
+                .header h1 { font-size: 1.8em; }
+                .header p { font-size: 1em; }
+                .box-title { font-size: 20px; }
+                .main-content { padding: 10px; }
+           }
+
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Hộp Bí Ẩn</h2>
+            <p>Văn Hóa Việt Nam</p>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="#" class="active" onclick="showSection('home'); return false;"><i class="fas fa-home fa-fw"></i> Trang chủ</a></li>
+            <li><a href="#" onclick="showSection('products'); return false;"><i class="fas fa-box-open fa-fw"></i> Sản phẩm</a></li>
+            <li><a href="#" onclick="showSection('info'); return false;"><i class="fas fa-info-circle fa-fw"></i> Thông tin</a></li>
+            <li>
+                <a href="#" onclick="showPayment(); return false;" class="payment-icon-container">
+                    <span><i class="fas fa-credit-card fa-fw"></i> Thanh toán</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Home Section -->
+        <div id="home-section">
+            <div class="header">
+                <h1>Hộp Bí Ẩn Về Văn Hóa Truyền Thống Việt Nam</h1>
+                <p>Khám phá văn hóa đặc sắc của Việt Nam qua từng sản phẩm</p>
+            </div>
+
+            <div class="container">
+                <!-- Hộp Cơ Bản -->
+                <div class="mystery-box" id="basic-box">
+                    <img src="https://i.imgur.com/3L8NKeC.jpeg" alt="Hộp Bí Ẩn Cơ Bản" class="box-image">
+                    <div class="box-content">
+                        <h2 class="box-title">Hộp Cơ Bản</h2>
+                        <p class="box-description">
+                            Những món quà bất ngờ, đậm chất văn hóa Việt, mang lại trải nghiệm mở hộp đầy thú vị!🎁✨
+                        </p>
+                        <div class="box-price">99.000₫</div>
+                        <button class="cta-button" onclick="showQuickPayment('basic-1', 'Hộp Cơ Bản', 99000, 1)">Mua ngay</button>
+                    </div>
+                </div>
+
+                <!-- Hộp Cao Cấp -->
+                <div class="mystery-box" id="premium-box">
+                    <img src="https://i.imgur.com/5jsR9jU.jpeg" alt="Hộp Bí Ẩn Cao Cấp" class="box-image">
+                    <div class="box-content">
+                        <h2 class="box-title">Hộp Cao Cấp</h2>
+                        <p class="box-description">
+                            Tinh hoa văn hóa hội tụ trong từng món quà, sang trọng và độc đáo, dành cho những ai yêu thích sự bất ngờ đẳng cấp!🎁🔥
+                        </p>
+                        <div class="box-price">199.000₫</div>
+                         <button class="cta-button" onclick="showQuickPayment('premium-1', 'Hộp Cao Cấp', 199000, 1)">Mua ngay</button>
+                    </div>
+                </div>
+
+                <!-- Hộp VIP -->
+                <div class="mystery-box" id="vip-box">
+                    <img src="https://i.imgur.com/BOiKqaq.jpeg" alt="Hộp Bí Ẩn VIP" class="box-image">
+                    <div class="box-content">
+                        <h2 class="box-title">Hộp VIP</h2>
+                        <p class="box-description">
+                            Phiên bản giới hạn với những món quà giá trị, tôn vinh nét đẹp truyền thống Việt Nam.
+                            Đẳng cấp - Bất ngờ - Xứng tầm!🎁👑
+                        </p>
+                        <div class="box-price">299.000₫</div>
+                         <button class="cta-button" onclick="showQuickPayment('vip-1', 'Hộp VIP', 299000, 1)">Mua ngay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Section (Combos) -->
+        <div id="products-section" style="display: none;">
+            <div class="header">
+                <h1>Combo Hộp Bí Ẩn</h1>
+                <p>Tiết kiệm hơn khi mua combo nhiều hộp</p>
+            </div>
+
+            <div class="container">
+                <!-- Combo Hộp Cơ Bản -->
+                <div class="mystery-box combo-box">
+                    <img src="https://i.imgur.com/3L8NKeC.jpeg" alt="Combo Hộp Cơ Bản" class="box-image">
+                    <div class="box-content">
+                        <h2 class="box-title">Combo Hộp Cơ Bản</h2>
+                        <p class="box-description">
+                            Tiết kiệm chi phí khi mua số lượng lớn hộp cơ bản. Chọn số lượng mong muốn:
+                        </p>
+
+                        <div class="combo-options" data-product-type="Hộp Cơ Bản" data-base-price="99000">
+                             <div class="combo-option selected" data-quantity="1" data-price="99000">
+                                <span>1 Hộp</span>
+                                <span>99.000₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="3" data-price="267300">
+                                <span>3 Hộp (Giảm 10%)</span>
+                                <span>267.300₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="6" data-price="475200">
+                                <span>6 Hộp (Giảm 20%)</span>
+                                <span>475.200₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="12" data-price="831600">
+                                <span>12 Hộp (Giảm 30%)</span>
+                                <span>831.600₫</span>
+                            </div>
+                        </div>
+
+                        <div class="box-price" id="basic-combo-price">99.000₫</div>
+                        <button class="cta-button" onclick="addSelectedComboToCart(this)">Mua ngay</button>
+                    </div>
+                </div>
+
+                <!-- Combo Hộp Cao Cấp -->
+                <div class="mystery-box combo-box">
+                    <img src="https://i.imgur.com/5jsR9jU.jpeg" alt="Combo Hộp Cao Cấp" class="box-image">
+                    <div class="box-content">
+                        <h2 class="box-title">Combo Hộp Cao Cấp</h2>
+                        <p class="box-description">
+                            Tiết kiệm chi phí khi mua số lượng lớn hộp cao cấp. Chọn số lượng mong muốn:
+                        </p>
+
+                        <div class="combo-options" data-product-type="Hộp Cao Cấp" data-base-price="199000">
+                            <div class="combo-option selected" data-quantity="1" data-price="199000">
+                                <span>1 Hộp</span>
+                                <span>199.000₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="3" data-price="537300">
+                                <span>3 Hộp (Giảm 10%)</span>
+                                <span>537.300₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="6" data-price="955200">
+                                <span>6 Hộp (Giảm 20%)</span>
+                                <span>955.200₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="12" data-price="1671600">
+                                <span>12 Hộp (Giảm 30%)</span>
+                                <span>1.671.600₫</span>
+                            </div>
+                        </div>
+
+                        <div class="box-price" id="premium-combo-price">199199.000₫</div>
+                        <button class="cta-button" onclick="addSelectedComboToCart(this)">Mua ngay</button>
+                    </div>
+                </div>
+
+                <!-- Combo Hộp VIP -->
+                <div class="mystery-box combo-box">
+                    <img src="https://i.imgur.com/BOiKqaq.jpeg" alt="Combo Hộp VIP" class="box-image">
+                    <div class="box-content">
+                        <h2 class="box-title">Combo Hộp VIP</h2>
+                         <p class="box-description">
+                             Tiết kiệm chi phí khi mua số lượng lớn hộp VIP. Chọn số lượng mong muốn:
+                         </p>
+
+                        <div class="combo-options" data-product-type="Hộp VIP" data-base-price="299000">
+                           <div class="combo-option selected" data-quantity="1" data-price="299000">
+                                <span>1 Hộp</span>
+                                <span>299.000₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="3" data-price="807300">
+                                <span>3 Hộp (Giảm 10%)</span>
+                                <span>807.300₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="6" data-price="1435200">
+                                <span>6 Hộp (Giảm 20%)</span>
+                                <span>1.435.200₫</span>
+                            </div>
+                            <div class="combo-option" data-quantity="12" data-price="2511600">
+                                <span>12 Hộp (Giảm 30%)</span>
+                                <span>2.511.600₫</span>
+                            </div>
+                        </div>
+
+                        <div class="box-price" id="vip-combo-price">299.000₫</div>
+                        <button class="cta-button" onclick="addSelectedComboToCart(this)">Mua ngay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div id="info-section" style="display: none;">
+             <div class="header">
+                <h1>Thông Tin Sản Phẩm</h1>
+                <p>Chi tiết về các món đồ có thể có trong hộp bí ẩn</p>
+            </div>
+
+            <div class="info-content">
+                 <div class="info-grid">
+                    <!-- Hộp Cơ Bản Info -->
+                    <div class="info-item">
+                        <h3>Hộp Cơ Bản</h3>
+                        <div class="info-details">
+                             <div class="info-text">
+                                 <p><strong>Giá:</strong> 99.000₫</p>
+                                 <p><strong>Các vật phẩm có thể xuất hiện:</strong></p>
+                                 <ul>
+                                     <li>Móc khóa: trống đồng, nón lá mini, quạt giấy, áo dài... </li>
+                                     <li>Huy hiệu, charm, phụ kiện trang trí đa dạng</li>
+                                 </ul>
+                             </div>
+                             <div class="info-visuals">
+                                  <img src="https://i.imgur.com/1LxKiyl.jpeg" alt="Hộp Cơ Bản Minh Họa" class="info-illustration">
+                                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.youtube.com/watch?v=SlMlex7xWac" class="qr-code" alt="QR Hộp Cơ Bản">
+                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Hộp Cao Cấp Info -->
+                     <div class="info-item">
+                         <h3>Hộp Cao Cấp</h3>
+                         <div class="info-details">
+                              <div class="info-text">
+                                  <p><strong>Giá:</strong> 199.000₫</p>
+                                  <p><strong>Các vật phẩm có thể xuất hiện:</strong></p>
+                                  <ul>
+                                      <li>Mô hình mini </li>
+                                      <li>Sản phẩm thủ công</li>
+                                      <li>Đồ dùng thủ công</li>
+                                  </ul>
+                              </div>
+                              <div class="info-visuals">
+                                   <img src="https://i.imgur.com/PbSJfzS.jpeg" alt="Hộp Cao Cấp Minh Họa" class="info-illustration">
+                                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://youtu.be/F_MAoIMSSv4?si=isTA21qUoze-G3jU" class="qr-code" alt="QR Hộp Cao Cấp">
+                              </div>
+                         </div>
+                     </div>
+
+                    <!-- Hộp VIP Info -->
+                     <div class="info-item">
+                         <h3>Hộp VIP</h3>
+                         <div class="info-details">
+                              <div class="info-text">
+                                  <p><strong>Giá:</strong> 299.000₫</p>
+                                  <p><strong>Các vật phẩm có thể xuất hiện:</strong></p>
+                                  <ul>
+                                      <li>Mô hình Di sản văn hóa cao cấp, tinh xảo</li>
+                                      <li>Mô hình đa chức năng (xoay được, phát nhạc, có đèn sáng)</li>
+                                  </ul>
+                              </div>
+                              <div class="info-visuals">
+                                  <img src="https://i.imgur.com/UCUu52E.jpeg" alt="Hộp VIP Minh Họa" class="info-illustration">
+                                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.youtube.com/watch?v=WTklbXoaP2U" class="qr-code" alt="QR Hộp VIP">
+                              </div>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeAllModals()"></div>
+
+    <!-- Quick Payment Modal -->
+    <div class="modal" id="quickPaymentModal">
+        <h2><i class="fas fa-credit-card"></i> Thanh Toán Nhanh</h2>
+        <div class="modal-content">
+            <div class="quick-payment-items" id="quickPaymentItems">
+                <!-- Product info will be loaded here -->
+            </div>
+            
+            <form id="quickPaymentForm" onsubmit="submitQuickPayment(event)">
+                <div class="form-group">
+                    <label for="quickName">Họ và tên <span style="color: red;">*</span></label>
+                    <input type="text" id="quickName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="quickPhone">Số điện thoại <span style="color: red;">*</span></label>
+                    <input type="tel" id="quickPhone" required pattern="[0-9]{10,11}" title="Số điện thoại gồm 10-11 chữ số">
+                </div>
+
+                <div class="form-group">
+                    <label for="quickAddress">Địa chỉ nhận hàng <span style="color: red;">*</span></label>
+                    <input type="text" id="quickAddress" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="quickEmail">Email (Để nhận xác nhận)</label>
+                    <input type="email" id="quickEmail">
+                </div>
+
+                <div class="payment-methods">
+                    <h3>Phương thức thanh toán <span style="color: red;">*</span></h3>
+                    <div class="payment-method">
+                        <input type="radio" id="quickMomo" name="quickPayment" value="momo" checked onchange="toggleQuickPaymentQR()">
+                        <label for="quickMomo">Ví điện tử MoMo</label>
+                    </div>
+                    <div class="payment-method">
+                        <input type="radio" id="quickVnpay" name="quickPayment" value="vnpay" onchange="toggleQuickPaymentQR()">
+                        <label for="quickVnpay">VNPAY QR</label>
+                    </div>
+                    <div class="payment-method">
+                        <input type="radio" id="quickCod" name="quickPayment" value="cod" onchange="toggleQuickPaymentQR()">
+                        <label for="quickCod">Thanh toán khi nhận hàng (COD)</label>
+                    </div>
+                </div>
+
+                <div class="payment-qr" id="quickMomoQr">
+                    <p>Quét mã MoMo để thanh toán <strong class="payment-amount"></strong></p>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Placeholder" alt="MoMo QR">
+                    <p>Hoặc chuyển khoản đến SĐT: <strong style="color:#d32f2f">0961234567</strong><br>
+                    Nội dung: <span class="payment-order-code">[Mã đơn hàng]</span> Họ tên</p>
+                </div>
+
+                <div class="payment-qr" id="quickVnpayQr">
+                    <p>Quét mã VNPAY để thanh toán <strong class="payment-amount"></strong></p>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Placeholder" alt="VNPAY QR">
+                    <p>Hỗ trợ thanh toán qua ứng dụng ngân hàng / ví điện tử.<br>
+                    Nội dung: <span class="payment-order-code">[Mã đơn hàng]</span> SĐT</p>
+                </div>
+
+                <div class="quick-payment-total" id="quickPaymentTotal">
+                    Tổng cộng: 0₫
+                </div>
+
+                <button type="submit" class="submit-btn">Xác nhận đặt hàng</button>
+                <button type="button" class="close-btn" onclick="hideQuickPayment()">Hủy bỏ</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Thank You Modal -->
+    <div class="modal" id="thankYouModal" style="display: none;">
+        <div class="thank-you">
+            <h2>Đặt hàng thành công!</h2>
+            <p><strong>Nàng Bạch Tuyết Và 7 Chú Lùn</strong> xin chân thành cảm ơn bạn đã ủng hộ sản phẩm!</p>
+            <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Check Mark" style="max-width: 80px;">
+            <p>Mã đơn hàng của bạn là: <strong id="orderNumber" style="color: #d32f2f; font-size: 1.2em;"></strong></p>
+            <p style="margin-top:10px;">Chúng tôi sẽ liên hệ xác nhận và giao hàng trong thời gian sớm nhất.</p>
+            <button class="submit-btn" onclick="closeAllModals()">Đóng</button>
+        </div>
+    </div>
+
+
+    <script>
+        let cart = []; // Initialize cart array
+
+        // ---- Navigation ----
+        function showSection(sectionId) {
+            ['home-section', 'products-section', 'info-section'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.display = 'none';
+            });
+
+            const targetSection = document.getElementById(sectionId + '-section');
+            if (targetSection) targetSection.style.display = 'block';
+
+            document.querySelectorAll('.sidebar-menu a').forEach(link => {
+                link.classList.remove('active');
+                const linkTarget = link.getAttribute('onclick');
+                if(linkTarget && linkTarget.includes(`showSection('${sectionId}')`)){
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // ---- Quick Payment ----
+        function showQuickPayment(id, name, price, quantity = 1) {
+            // Clear any existing items
+            cart = [];
+            
+            // Add the selected item to cart
+            addToCart(id, name, price, quantity, false);
+            
+            // Update the quick payment display
+            updateQuickPaymentDisplay();
+            
+            // Generate dynamic temporary order code suggestion for payment content
+            const tempOrderCode = 'DH' + Math.floor(Math.random() * 100000);
+            document.querySelectorAll('.payment-order-code').forEach(el => el.textContent = tempOrderCode);
+            
+            // Update QR codes with the correct amount
+            updateQuickPaymentQRCodes(price, tempOrderCode);
+            toggleQuickPaymentQR();
+            
+            // Show the modal
+            document.getElementById('quickPaymentModal').style.display = 'block';
+            showOverlay();
+        }
+        
+        function updateQuickPaymentDisplay() {
+            const container = document.getElementById('quickPaymentItems');
+            const totalEl = document.getElementById('quickPaymentTotal');
+            
+            container.innerHTML = '';
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<p>Không có sản phẩm nào</p>';
+                totalEl.textContent = 'Tổng cộng: 0₫';
+                return;
+            }
+            
+            cart.forEach(item => {
+                const itemEl = document.createElement('div');
+                itemEl.classList.add('quick-payment-item');
+                itemEl.innerHTML = `
+                    <span>${item.name} (x${item.quantity})</span>
+                    <span>${(item.price * item.quantity).toLocaleString('vi-VN')}₫</span>
+                `;
+                container.appendChild(itemEl);
+            });
+            
+            const total = calculateCartTotal();
+            totalEl.textContent = `Tổng cộng: ${total.toLocaleString('vi-VN')}₫`;
+        }
+        
+        function updateQuickPaymentQRCodes(totalPrice, orderCode) {
+            const momoQrImg = document.getElementById('quickMomoQr').querySelector('img');
+            const vnpayQrImg = document.getElementById('quickVnpayQr').querySelector('img');
+            const amountDisplay = document.querySelectorAll('#quickPaymentModal .payment-amount');
+            const orderCodeDisplay = document.querySelectorAll('#quickPaymentModal .payment-order-code');
+
+            // Basic MoMo QR String
+            const momoData = `2|99|0961234567|7 Nan Bach Tuyet Store|HD${orderCode}|${totalPrice}|${orderCode}|TT ${orderCode}`;
+            momoQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=B51F1E&bgcolor=ffffff&data=${encodeURIComponent(momoData)}`;
+
+            // VNPAY QR String
+            const vnpayData = `Pay via VNPAY\nOrder: ${orderCode}\nAmount: ${totalPrice.toLocaleString('vi-VN')} VND`;
+            vnpayQrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=005AAA&bgcolor=ffffff&data=${encodeURIComponent(vnpayData)}`;
+
+            // Update display texts
+            amountDisplay.forEach(el => el.textContent = `(${totalPrice.toLocaleString('vi-VN')}₫)`);
+            orderCodeDisplay.forEach(el => el.textContent = orderCode);
+        }
+        
+        function toggleQuickPaymentQR() {
+            const selectedPayment = document.querySelector('input[name="quickPayment"]:checked').value;
+            document.getElementById('quickMomoQr').style.display = selectedPayment === 'momo' ? 'block' : 'none';
+            document.getElementById('quickVnpayQr').style.display = selectedPayment === 'vnpay' ? 'block' : 'none';
+        }
+        
+        function hideQuickPayment() {
+            document.getElementById('quickPaymentModal').style.display = 'none';
+            hideOverlay();
+        }
+        
+        function submitQuickPayment(event) {
+            event.preventDefault();
+            
+            const totalPrice = calculateCartTotal();
+            const fullName = document.getElementById('quickName').value.trim();
+            const phone = document.getElementById('quickPhone').value.trim();
+            const address = document.getElementById('quickAddress').value.trim();
+            const email = document.getElementById('quickEmail').value.trim();
+            const paymentMethod = document.querySelector('input[name="quickPayment"]:checked').value;
+
+            if (!fullName || !phone || !address) {
+                alert('Vui lòng điền đầy đủ thông tin bắt buộc (*)!');
+                return;
+            }
+            
+            if (totalPrice <= 0 || cart.length === 0) {
+                alert('Đã có lỗi xảy ra hoặc không có sản phẩm nào để thanh toán.');
+                closeAllModals();
+                return;
+            }
+
+            const orderNumber = 'DH' + Math.floor(100000 + Math.random() * 900000);
+
+            const orderData = {
+                orderNumber,
+                totalPrice: totalPrice,
+                items: JSON.parse(JSON.stringify(cart)),
+                itemCount: calculateTotalQuantity(),
+                customerInfo: { fullName, phone, address, email },
+                paymentMethod,
+                orderDate: new Date().toISOString()
+            };
+
+            console.log('ĐƠN HÀNG ĐÃ ĐẶT (QUICK PAYMENT):', JSON.stringify(orderData, null, 2));
+            alert(`(Simulation)\nĐơn hàng ${orderNumber} đã được tạo.\nTổng tiền: ${totalPrice.toLocaleString('vi-VN')}₫\nPhương thức TT: ${paymentMethod.toUpperCase()}\n\nKiểm tra Console (F12) để xem chi tiết đơn hàng.`);
+
+            // Clear cart and reset form
+            cart = [];
+            saveCart();
+            document.getElementById('quickPaymentForm').reset();
+
+            hideQuickPayment();
+            showThankYou(orderNumber);
+        }
+
+        // ---- Cart Management ----
+        function loadCart() {
+            const storedCart = localStorage.getItem('mysteryBoxCart');
+            if (storedCart) {
+                cart = JSON.parse(storedCart);
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem('mysteryBoxCart', JSON.stringify(cart));
+        }
+
+         function addToCart(id, name, price, quantity = 1, showMessage = true) {
+            let pricePerSingleItem = quantity > 0 ? price / quantity : price;
+            if (id.endsWith('-1')) {
+                pricePerSingleItem = price;
+            }
+
+            const existingItemIndex = cart.findIndex(item => item.id === id);
+
+             if (existingItemIndex > -1) {
+                 cart[existingItemIndex].quantity += quantity;
+             } else {
+                 cart.push({ id, name, price: pricePerSingleItem, quantity });
+             }
+
+             if (showMessage) {
+                 showFeedback(`Đã thêm: ${name} (x${quantity})`);
+             }
+             saveCart();
+         }
+
+        function removeFromCart(id) {
+            const itemIndex = cart.findIndex(item => item.id === id);
+             if(itemIndex > -1){
+                 showFeedback(`Đã xóa: ${cart[itemIndex].name}`);
+                 cart.splice(itemIndex, 1);
+                 saveCart();
+             }
+        }
+
+        function calculateCartTotal() {
+            return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        }
+
+        function calculateTotalQuantity() {
+             return cart.reduce((count, item) => count + item.quantity, 0);
+        }
+
+        function showFeedback(message) {
+            const feedbackEl = document.createElement('div');
+            feedbackEl.textContent = message;
+            feedbackEl.style.position = 'fixed';
+            feedbackEl.style.bottom = '20px';
+            feedbackEl.style.left = '50%';
+            feedbackEl.style.transform = 'translateX(-50%)';
+            feedbackEl.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+            feedbackEl.style.color = 'white';
+            feedbackEl.style.padding = '12px 25px';
+            feedbackEl.style.borderRadius = '30px';
+            feedbackEl.style.zIndex = '2000';
+            feedbackEl.style.opacity = '1';
+            feedbackEl.style.transition = 'opacity 0.5s ease-out, bottom 0.5s ease-out';
+            feedbackEl.style.fontSize = '0.95em';
+            feedbackEl.style.boxShadow = '0 3px 10px rgba(0,0,0,0.2)';
+
+            document.body.appendChild(feedbackEl);
+
+            setTimeout(() => {
+                 feedbackEl.style.bottom = '30px';
+             }, 10);
+
+            setTimeout(() => {
+                 feedbackEl.style.opacity = '0';
+                 feedbackEl.style.bottom = '10px';
+                 setTimeout(() => {
+                    if (feedbackEl.parentNode) {
+                         document.body.removeChild(feedbackEl);
+                     }
+                 }, 500);
+             }, 2500);
+        }
+
+        // ---- Combo Selection ----
+         function selectComboOption(element) {
+             const parent = element.closest('.combo-options');
+             parent.querySelectorAll('.combo-option').forEach(opt => opt.classList.remove('selected'));
+             element.classList.add('selected');
+
+             const price = element.dataset.price;
+             const priceDisplay = parent.closest('.combo-box').querySelector('.box-price');
+             priceDisplay.textContent = parseInt(price).toLocaleString('vi-VN') + '₫';
+         }
+
+        document.querySelectorAll('.combo-option').forEach(option => {
+            option.addEventListener('click', () => selectComboOption(option));
+        });
+
+         function addSelectedComboToCart(button) {
+             const boxContent = button.closest('.box-content');
+             const comboOptionsContainer = boxContent.querySelector('.combo-options');
+             const selectedOption = comboOptionsContainer.querySelector('.combo-option.selected');
+
+             if (!selectedOption) {
+                 alert("Vui lòng chọn một gói combo!");
+                 return;
+             }
+
+             const productType = comboOptionsContainer.dataset.productType;
+             const quantity = parseInt(selectedOption.dataset.quantity);
+             const price = parseInt(selectedOption.dataset.price);
+             const comboId = `${productType.toLowerCase().replace(/\s+/g, '-')}-${quantity}`;
+             const comboName = `${productType} (Combo ${quantity} Hộp)`;
+
+             showQuickPayment(comboId, comboName, price, 1);
+         }
+
+        // ---- Modal Controls ----
+        function showOverlay() {
+             document.getElementById('overlay').style.display = 'block';
+        }
+        function hideOverlay() {
+             const quickVisible = document.getElementById('quickPaymentModal').style.display === 'block';
+            const thanksVisible = document.getElementById('thankYouModal').style.display === 'block';
+            if (!quickVisible && !thanksVisible) {
+                document.getElementById('overlay').style.display = 'none';
+            }
+        }
+        function closeAllModals() {
+            hideQuickPayment();
+            hideThankYou();
+            hideOverlay();
+        }
+
+        function showThankYou(orderNumber) {
+            document.getElementById('orderNumber').textContent = orderNumber;
+            document.getElementById('thankYouModal').style.display = 'block';
+            showOverlay();
+        }
+         function hideThankYou() {
+            document.getElementById('thankYouModal').style.display = 'none';
+            hideOverlay();
+         }
+
+        // ---- Initialization ----
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCart();
+            showSection('home');
+            document.querySelectorAll('.combo-options').forEach(container => {
+                const firstOption = container.querySelector('.combo-option');
+                if (firstOption) selectComboOption(firstOption);
+             });
+        });
+
+        document.getElementById('overlay').addEventListener('click', closeAllModals);
+
+    </script>
+
+</body>
+</html>
